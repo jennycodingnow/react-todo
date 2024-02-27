@@ -1,17 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from 'react';
+
+const todoList = [
+  {id:1, title: "Complete lesson one assignment"},
+  {id:2, title: "Practice Leetcode"},
+  {id:3, title: "Do Laundry"},
+];
 
 function App() {
-
   return (
     <>
       <div>
       <h1>
-        Hello Word
+        Todo List
       </h1>
-      </div>
-      
+      <ul>
+        {todoList.map(todo => (
+          <li key={todo.id}>{todo.title}</li>
+        ))}
+      </ul>
+      </div>  
     </>
   )
 }
