@@ -1,10 +1,7 @@
 import React from 'react';
+import TodoList from './TodoList';
+import AddTodoForm from './AddTodoForm';
 
-const todoList = [
-  {id:1, title: "Complete lesson one assignment"},
-  {id:2, title: "Practice Leetcode"},
-  {id:3, title: "Do Laundry"},
-];
 
 function App() {
   return (
@@ -13,11 +10,8 @@ function App() {
       <h1>
         Todo List
       </h1>
-      <ul>
-        {todoList.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      <TodoList/>
+      <AddTodoForm/>
       </div>  
     </>
   )
