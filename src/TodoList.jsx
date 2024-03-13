@@ -1,20 +1,23 @@
-import React from 'react';
+import TodoListItem from "./TodoListItem";
+import PropTypes from "prop-types";
 
-const todoList = [
-    {id:1, title: "Complete lesson one assignment"},
-    {id:2, title: "Practice Leetcode"},
-    {id:3, title: "Do Laundry"},
-    ];
-
-const TodoList=()=>{
+const TodoList = (props) => {
     return (
         <ul>
-            {todoList.map(todo => (
-            <li key={todo.id}>{todo.title}</li>
+            {props.todoList.map((item) => (
+                <TodoListItem key={item.id} todo={item} />
             ))}
         </ul>
-    )
+    );
+};
 
-}
+export default TodoList;
 
-export default TodoList
+TodoList.propTypes = {
+    todoList: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+};
