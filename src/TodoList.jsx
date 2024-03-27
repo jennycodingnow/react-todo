@@ -2,9 +2,10 @@ import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
 
 const TodoList = (props) => {
+    const { todoList } = props;
     return (
         <ul>
-            {props.todoList.map((item) => (
+            {todoList.map((item) => (
                 <TodoListItem key={item.id} todo={item} />
             ))}
         </ul>
