@@ -1,0 +1,12 @@
+.add-todo-form-container {
+    display: flex;
+    align-items: center;
+}
+
+.to-input {
+    margin-right: 50px;
+}
+
+.add-button {
+    margin: 10px;
+}
