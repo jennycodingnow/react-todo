@@ -1,0 +1,8 @@
+.todo-list-item-container {
+    display: flex;
+    align-items: center;
+}
+
+.todo-title {
+    margin-right: 10px;
+}
