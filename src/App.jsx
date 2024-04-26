@@ -9,15 +9,16 @@ import "./App.css";
 //     { id: 3, title: "Do Laundry" },
 // ];
 
+const apiURL = `https://api.airtable.com/v0/${
+    import.meta.env.VITE_AIRTABLE_BASE_ID
+}/${import.meta.env.VITE_TABLE_NAME}`;
+
 function App() {
     const [todoList, setTodoList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     // Get tasks from AirTable
     const fetchData = async () => {
-        const apiURL = `https://api.airtable.com/v0/${
-            import.meta.env.VITE_AIRTABLE_BASE_ID
-        }/${import.meta.env.VITE_TABLE_NAME}`;
         const options = {
             method: "GET",
             headers: {
@@ -45,34 +46,29 @@ function App() {
             setIsLoading(false);
         } catch (error) {
             console.log(error.message);
-            return null;
+            setIsLoading(false);
         }
     };
 
     // Post a task to Airtable
     const postTodo = async (todo) => {
+        const airtableData = {
+            fields: {
+                title: todo.title,
+            },
+        };
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${
+                    import.meta.env.VITE_AIRTABLE_API_TOKEN
+                }`,
+            },
+            body: JSON.stringify(airtableData),
+        };
         try {
-            const airtableData = {
-                fields: {
-                    title: todo.title,
-                },
-            };
-
-            const response = await fetch(
-                `https://api.airtable.com/v0/${
-                    import.meta.env.VITE_AIRTABLE_BASE_ID
-                }/Default`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${
-                            import.meta.env.VITE_AIRTABLE_API_TOKEN
-                        }`,
-                    },
-                    body: JSON.stringify(airtableData),
-                }
-            );
+            const response = await fetch(apiURL, options);
 
             if (!response.ok) {
                 const message = `Error has ocurred: ${response.status}`;
@@ -80,40 +76,32 @@ function App() {
             }
 
             const dataResponse = await response.json();
-            console.log(dataResponse);
-            // return dataResponse;
             return { id: dataResponse.id, title: dataResponse.fields.title };
         } catch (error) {
             console.log(error.message);
-            return null;
         }
     };
 
     // Delete from Airtable
-    const postDeleteTodo = async (id) => {
+    const deleteTodo = async (id) => {
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${
+                    import.meta.env.VITE_AIRTABLE_API_TOKEN
+                }`,
+            },
+        };
         try {
-            const response = await fetch(
-                `https://api.airtable.com/v0/${
-                    import.meta.env.VITE_AIRTABLE_BASE_ID
-                }/Default/${id}`,
-                {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${
-                            import.meta.env.VITE_AIRTABLE_API_TOKEN
-                        }`,
-                    },
-                }
-            );
+            const response = await fetch(`${apiURL}/${id}`, options);
 
             if (!response.ok) {
                 const message = `Error has ocurred: ${response.status}`;
                 throw new Error(message);
+            } else {
+                console.log("Task has been deleted successfully.");
             }
-
-            const data = await response.json();
-            return data;
         } catch (error) {
             console.log(error.message);
             return null;
@@ -141,7 +129,7 @@ function App() {
 
     const removeTodo = async (id) => {
         try {
-            await postDeleteTodo(id);
+            await deleteTodo(id);
             const updateTodoList = todoList.filter((todo) => todo.id != id);
             setTodoList(updateTodoList);
         } catch (error) {
