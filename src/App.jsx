@@ -45,7 +45,7 @@ function App() {
             setTodoList(todos);
             setIsLoading(false);
         } catch (error) {
-            console.log(error.message);
+            console.error(error);
             setIsLoading(false);
         }
     };
@@ -78,7 +78,7 @@ function App() {
             const dataResponse = await response.json();
             return { id: dataResponse.id, title: dataResponse.fields.title };
         } catch (error) {
-            console.log(error.message);
+            console.error(error);
         }
     };
 
@@ -103,7 +103,7 @@ function App() {
                 console.log("Task has been deleted successfully.");
             }
         } catch (error) {
-            console.log(error.message);
+            console.error(error);
             return null;
         }
     };
@@ -123,7 +123,7 @@ function App() {
             const data = await postTodo(todo);
             setTodoList([...todoList, data]);
         } catch (error) {
-            console.error(error.message);
+            console.error(error);
         }
     };
 
@@ -133,7 +133,7 @@ function App() {
             const updateTodoList = todoList.filter((todo) => todo.id != id);
             setTodoList(updateTodoList);
         } catch (error) {
-            console.error(error.message);
+            console.error(error);
         }
     };
 
