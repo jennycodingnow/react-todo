@@ -1,8 +1,16 @@
 .todo-list-item-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
 }
 
 .todo-title {
-    margin-right: 10px;
+    flex-grow: 1;
+}
+
+.remove-button {
+    color: salmon;
 }

@@ -9,19 +9,107 @@ import "./App.css";
 //     { id: 3, title: "Do Laundry" },
 // ];
 
+const apiURL = `https://api.airtable.com/v0/${
+    import.meta.env.VITE_AIRTABLE_BASE_ID
+}/${import.meta.env.VITE_TABLE_NAME}`;
+
 function App() {
     const [todoList, setTodoList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve({ data: { todoList: [] } });
-            }, 2000);
-        }).then((result) => {
-            setTodoList(result.data.todoList);
+    // Get tasks from AirTable
+    const fetchData = async () => {
+        const options = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${
+                    import.meta.env.VITE_AIRTABLE_API_TOKEN
+                }`,
+            },
+        };
+        try {
+            const response = await fetch(apiURL, options);
+
+            if (!response.ok) {
+                const message = `Error has ocurred: ${response.status}`;
+                throw new Error(message);
+            }
+            const data = await response.json();
+            const todos = data.records.map((todo) => {
+                const newTodo = {
+                    id: todo.id,
+                    title: todo.fields.title,
+                };
+                return newTodo;
+            });
+            setTodoList(todos);
             setIsLoading(false);
-        });
+        } catch (error) {
+            console.error(error);
+            setIsLoading(false);
+        }
+    };
+
+    // Post a task to Airtable
+    const postTodo = async (todo) => {
+        const airtableData = {
+            fields: {
+                title: todo.title,
+            },
+        };
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${
+                    import.meta.env.VITE_AIRTABLE_API_TOKEN
+                }`,
+            },
+            body: JSON.stringify(airtableData),
+        };
+        try {
+            const response = await fetch(apiURL, options);
+
+            if (!response.ok) {
+                const message = `Error has ocurred: ${response.status}`;
+                throw new Error(message);
+            }
+
+            const dataResponse = await response.json();
+            return { id: dataResponse.id, title: dataResponse.fields.title };
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // Delete from Airtable
+    const deleteTodo = async (id) => {
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${
+                    import.meta.env.VITE_AIRTABLE_API_TOKEN
+                }`,
+            },
+        };
+        try {
+            const response = await fetch(`${apiURL}/${id}`, options);
+
+            if (!response.ok) {
+                const message = `Error has ocurred: ${response.status}`;
+                throw new Error(message);
+            } else {
+                console.log("Task has been deleted successfully.");
+            }
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     useEffect(() => {
@@ -30,13 +118,23 @@ function App() {
         }
     }, [todoList, isLoading]);
 
-    const addTodo = (newTodo) => {
-        setTodoList([...todoList, newTodo]);
+    const addTodo = async (todo) => {
+        try {
+            const data = await postTodo(todo);
+            setTodoList([...todoList, data]);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    const removeTodo = (id) => {
-        const updateTodoList = todoList.filter((todo) => todo.id != id);
-        setTodoList(updateTodoList);
+    const removeTodo = async (id) => {
+        try {
+            await deleteTodo(id);
+            const updateTodoList = todoList.filter((todo) => todo.id != id);
+            setTodoList(updateTodoList);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
