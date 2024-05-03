@@ -13,6 +13,7 @@ const InputWithLabel = (props) => {
             <label htmlFor="todoTitle">{children}</label>
             <input
                 id="todoTitle"
+                data-testid="todoTitle"
                 name="title"
                 type="text"
                 placeholder="Add task"
