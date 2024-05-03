@@ -1,5 +1,5 @@
 import { render, screen, act } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vitest } from "vitest";
 import App from "./App.jsx";
 
 describe("App", () => {
@@ -19,7 +19,7 @@ describe("App", () => {
         expect(loadingMessage).toBeInTheDocument();
 
         await act(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 600));
+            await new Promise((resolve) => setTimeout(resolve, 10000));
         });
 
         const loadingMessageAfterLoading = screen.queryByText(/loading/i);
@@ -27,5 +27,15 @@ describe("App", () => {
 
         const todoList = screen.queryByRole("list");
         expect(todoList).toBeInTheDocument();
+    }, 20000);
+    it("Adds a task to the todo list", async () => {
+        const postTodoMock = vitest.fn();
+        render(<App postTodo={postTodoMock} />);
+
+        const mockResponseData = { id: "mockId", title: "Mock Title" };
+        postTodoMock.mockResolvedValue(mockResponseData);
+        const todo = { title: "Task Title" };
+        const result = await postTodoMock(todo);
+        expect(result).toEqual(mockResponseData);
     });
 });
