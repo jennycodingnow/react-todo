@@ -141,12 +141,12 @@ function App() {
     return (
         <BrowserRouter>
             <div>
-                <h1>Todo List</h1>
                 <Routes>
                     <Route
                         path="/"
                         element={
                             <>
+                                <h1>Todo List</h1>
                                 <AddTodoForm onAddTodo={addTodo} />
                                 {isLoading ? (
                                     <p>Loading...</p>
