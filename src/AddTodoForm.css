@@ -1,11 +1,18 @@
 .add-todo-form-container {
     display: flex;
     align-items: center;
+    font-weight: bold;
 }
 
-.todo-input {
-    margin-right: 50px;
+label+input {
+    margin-left: 50px;
+    padding: 10px;
+    background-color: #F7C964;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
 }
+
 
 .add-button {
     margin: 10px;

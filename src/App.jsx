@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
-import "./App.css";
+// import "./App.css";
+import styles from "./App.module.css";
 
 // const todoList = [
 //     { id: 1, title: "Complete lesson one assignment" },
@@ -140,13 +141,15 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div>
+            <div className={styles.container}>
                 <Routes>
                     <Route
                         path="/"
                         element={
                             <>
-                                <h1>Todo List</h1>
+                                <h1 className={styles.headlinePrimary}>
+                                    Todo List
+                                </h1>
                                 <AddTodoForm onAddTodo={addTodo} />
                                 {isLoading ? (
                                     <p>Loading...</p>

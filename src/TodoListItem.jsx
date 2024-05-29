@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
-import "./TodoListItem.css";
 import { FaTrash } from "react-icons/fa";
+import styles from "./TodoListItem.module.css";
 
 const TodoListItem = (props) => {
     const { todo, onRemoveTodo } = props;
     return (
-        <div className="todo-list-item-container">
-            <li className="todo-title">{todo.title}</li>
+        <div className={styles.TodoListItemContainer}>
+            <li className={styles.ListItem}>{todo.title}</li>
             <button
                 type="button"
                 className="remove-button"
                 onClick={() => onRemoveTodo(todo.id)}
             >
-                <FaTrash />
+                <FaTrash className={styles.TrashCan} />
             </button>
         </div>
     );

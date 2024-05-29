@@ -1,0 +1,23 @@
+:global #root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #66C1C1;
+    color: #171212;
+}
+
+.headlinePrimary {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+body {
+    background-color: #F4807A;
+}
