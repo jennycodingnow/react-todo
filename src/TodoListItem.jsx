@@ -12,7 +12,7 @@ const TodoListItem = (props) => {
                 className="remove-button"
                 onClick={() => onRemoveTodo(todo.id)}
             >
-                <FaTrash className={styles.TrashCan} />
+                <FaTrash className={styles.FaTrashIcon} />
             </button>
         </div>
     );

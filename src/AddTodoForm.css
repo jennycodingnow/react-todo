@@ -13,8 +13,11 @@ label+input {
     font-size: 15px;
 }
 
-
 .add-button {
     margin: 10px;
     background-color: #008080;
+}
+
+.add-button:hover {
+    background-color: #5683ED;
 }

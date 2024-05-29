@@ -16,6 +16,11 @@
     margin: 10px;
 }
 
-.TrashCan {
+.FaTrashIcon {
     color: salmon;
+    transition: color 0.3s ease;
+}
+
+.FaTrashIcon:hover {
+    color: red;
 }
