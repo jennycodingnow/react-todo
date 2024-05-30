@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     font-weight: bold;
+    width: 100%;
 }
 
 label+input {
@@ -11,6 +12,7 @@ label+input {
     color: black;
     font-weight: bold;
     font-size: 15px;
+    width: 100%;
 }
 
 .add-button {

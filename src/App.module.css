@@ -4,12 +4,22 @@
     padding: 2rem;
 }
 
+
 .container {
+    /* If the screen is at least 800px, the container will be this size */
+    width: 500px;
     display: flex;
     flex-direction: column;
     padding: 20px;
     background: #66C1C1;
     color: #171212;
+}
+
+@media only screen and (max-width: 800px) {
+    .container {
+        /* If the screen goes below 800px, the width of the container will be 90% of whatever that width is */
+        width: 90%;
+    }
 }
 
 .headlinePrimary {
