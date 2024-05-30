@@ -1,13 +1,25 @@
 .add-todo-form-container {
     display: flex;
     align-items: center;
+    font-weight: bold;
+    width: 100%;
 }
 
-.todo-input {
-    margin-right: 50px;
+label+input {
+    margin-left: 50px;
+    padding: 10px;
+    background-color: #F7C964;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
 }
 
 .add-button {
     margin: 10px;
     background-color: #008080;
+}
+
+.add-button:hover {
+    background-color: #5683ED;
 }

@@ -1,0 +1,26 @@
+.TodoListItemContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 40px;
+    margin: 5px;
+    border-bottom: 1px solid #ccc;
+    background-color: #B685DA;
+    border-radius: 10px;
+}
+
+
+.ListItem {
+    color: black;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.FaTrashIcon {
+    color: salmon;
+    transition: color 0.3s ease;
+}
+
+.FaTrashIcon:hover {
+    color: red;
+}
