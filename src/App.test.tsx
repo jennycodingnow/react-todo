@@ -1,6 +1,6 @@
 import { render, screen, act } from "@testing-library/react";
 import { describe, it, expect, vitest } from "vitest";
-import App from "./App.jsx";
+import App from "./App.js";
 
 describe("App", () => {
     it("renders the App component", () => {

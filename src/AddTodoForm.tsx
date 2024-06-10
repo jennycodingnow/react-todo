@@ -1,18 +1,22 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import InputWithLabel from "./InputWithLabel";
 import "./AddTodoForm.css";
 
-const AddTodoForm = (props) => {
-    const { onAddTodo } = props;
+type AddTodoProps = {
+    onAddTodo: (todo: TodoItem) => void
+}
+
+const AddTodoForm = ({ onAddTodo }: AddTodoProps) => {
+    
     const [todoTitle, setTodoTitle] = useState("");
 
-    const handleTitleChange = (event) => {
+    const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const newTodoTitle = event.target.value;
         setTodoTitle(newTodoTitle);
     };
 
-    const handleAddTodo = (event) => {
+    const handleAddTodo = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log(todoTitle);
         onAddTodo({ title: todoTitle, id: Date.now() });
@@ -22,7 +26,6 @@ const AddTodoForm = (props) => {
     return (
         <form className="add-todo-form-container" onSubmit={handleAddTodo}>
             <InputWithLabel
-                className="todo-input"
                 todoTitle={todoTitle}
                 handleTitleChange={handleTitleChange}
             >
@@ -37,6 +40,3 @@ const AddTodoForm = (props) => {
 
 export default AddTodoForm;
 
-AddTodoForm.propTypes = {
-    onAddTodo: PropTypes.func.isRequired,
-};
