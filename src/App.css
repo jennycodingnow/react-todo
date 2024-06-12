@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #66C1C1;
+    background-color: #F2C6C2;
     color: #171212;
     border-radius: 10px;
 }
@@ -41,7 +41,7 @@
 }
 
 body {
-    background-color: #F4807A;
+    background-color: #F2E8DF;
     align-items: center;
     justify-content: center;
 }

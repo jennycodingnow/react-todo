@@ -29,10 +29,3 @@ dist-ssr
 
 # TypeScript declaration files
 *.d.ts
-
-# TypeScript configuration files
-tsconfig.json
-tsconfig.node.json
-
-# Vite configuration file
-vite.config.js
