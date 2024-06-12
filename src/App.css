@@ -5,14 +5,15 @@
 }
 
 
-.container {
+.appContainer {
     /* If the screen is at least 800px, the container will be this size */
     width: 500px;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background: #66C1C1;
+    background-color: #F2C6C2;
     color: #171212;
+    border-radius: 10px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -22,6 +23,17 @@
     }
 }
 
+.headingContainer {
+    display: flex;
+    align-items: center;
+    /* Align items vertically */
+    font-size: 20px;
+}
+
+.calendarIcon {
+    margin-left: 10px;
+}
+
 .headlinePrimary {
     font-size: 48px;
     font-weight: 600;
@@ -29,5 +41,7 @@
 }
 
 body {
-    background-color: #F4807A;
+    background-color: #F2E8DF;
+    align-items: center;
+    justify-content: center;
 }

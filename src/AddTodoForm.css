@@ -5,13 +5,19 @@
     width: 100%;
 }
 
+label {
+    color: black;
+    font-size: 16px;
+
+}
+
 label+input {
-    margin-left: 50px;
+    margin-left: 20px;
     padding: 10px;
-    background-color: #F7C964;
+    background-color: #F2B263;
     color: black;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     width: 100%;
 }
 

@@ -1,19 +1,19 @@
 import { render, screen, act } from "@testing-library/react";
 import { describe, it, expect, vitest } from "vitest";
-import App from "./App.jsx";
+import App from "./App";
 
 describe("App", () => {
     it("renders the App component", () => {
-        render(<App />);
+        render(<App/>);
         screen.debug();
     });
     it("displays loading message when component is loaded", () => {
-        render(<App />);
+        render(<App/>);
         const loadingMessage = screen.getByText(/loading/i);
         expect(loadingMessage).toBeInTheDocument();
     });
     it("displays task list when loading message disappears", async () => {
-        render(<App />);
+        render(<App/>);
 
         const loadingMessage = screen.getByText(/loading/i);
         expect(loadingMessage).toBeInTheDocument();

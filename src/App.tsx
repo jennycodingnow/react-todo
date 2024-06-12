@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
-import styles from "./App.module.css";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import "./App.css"
 
 // const todoList = [
 //     { id: 1, title: "Complete lesson one assignment" },
@@ -15,8 +16,8 @@ const apiURL = `https://api.airtable.com/v0/${
 }/${import.meta.env.VITE_TABLE_NAME}`;
 
 function App() {
-    const [todoList, setTodoList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [todoList, setTodoList] = useState<TodoItem[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     // Get tasks from AirTable
     const fetchData = async () => {
@@ -36,7 +37,7 @@ function App() {
                 throw new Error(message);
             }
             const data = await response.json();
-            const todos = data.records.map((todo) => {
+            const todos = data.records.map((todo: {id: number, fields: { title: string}}) => {
                 const newTodo = {
                     id: todo.id,
                     title: todo.fields.title,
@@ -52,7 +53,7 @@ function App() {
     };
 
     // Post a task to Airtable
-    const postTodo = async (todo) => {
+    const postTodo = async (todo: TodoItem): Promise<TodoItem | null> => {
         const airtableData = {
             fields: {
                 title: todo.title,
@@ -81,10 +82,11 @@ function App() {
         } catch (error) {
             console.error(error);
         }
+        return null;
     };
 
     // Delete from Airtable
-    const deleteTodo = async (id) => {
+    const deleteTodo = async (id: number) => {
         const options = {
             method: "DELETE",
             headers: {
@@ -105,7 +107,6 @@ function App() {
             }
         } catch (error) {
             console.error(error);
-            return null;
         }
     };
 
@@ -119,16 +120,19 @@ function App() {
         }
     }, [todoList, isLoading]);
 
-    const addTodo = async (todo) => {
+    const addTodo = async (todo: TodoItem) => {
         try {
             const data = await postTodo(todo);
+            if (data == null) {
+                return;
+            }
             setTodoList([...todoList, data]);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const removeTodo = async (id) => {
+    const removeTodo = async (id: number) => {
         try {
             await deleteTodo(id);
             const updateTodoList = todoList.filter((todo) => todo.id != id);
@@ -140,15 +144,20 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className={styles.container}>
+            <div className="appContainer">
                 <Routes>
                     <Route
                         path="/"
                         element={
                             <>
-                                <h1 className={styles.headlinePrimary}>
-                                    Todo List
-                                </h1>
+                                <div className="headingContainer">
+                                    <h1 className="headlinePrimary">
+                                        Todo List
+                                    </h1>
+                                    <FaRegCalendarAlt
+                                        className="calendarIcon"
+                                    />
+                                </div>
                                 <AddTodoForm onAddTodo={addTodo} />
                                 {isLoading ? (
                                     <p>Loading...</p>

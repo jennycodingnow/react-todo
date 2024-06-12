@@ -5,10 +5,9 @@
     padding-left: 40px;
     margin: 5px;
     border-bottom: 1px solid #ccc;
-    background-color: #B685DA;
+    background-color: #86A69D;
     border-radius: 10px;
 }
-
 
 .ListItem {
     color: black;
@@ -17,7 +16,7 @@
 }
 
 .FaTrashIcon {
-    color: salmon;
+    color: #F28585;
     transition: color 0.3s ease;
 }
 

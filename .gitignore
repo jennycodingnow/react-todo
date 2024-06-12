@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Compiled JavaScript files
+*.js
+
+# TypeScript declaration files
+*.d.ts
