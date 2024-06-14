@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { ChangeEvent, FormEvent, useState } from "react";
 import InputWithLabel from "./InputWithLabel";
 import "./AddTodoForm.css";

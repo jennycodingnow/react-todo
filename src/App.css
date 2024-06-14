@@ -11,7 +11,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #F2C6C2;
+    /* background-color: #F2C6C2; */
+    background-color: #F2E8DF;
     color: #171212;
     border-radius: 10px;
 }
@@ -30,6 +31,16 @@
     font-size: 20px;
 }
 
+.sortingButtonContainer {
+    display: flex;
+    align-items: center;
+    /* Adjust alignment as needed */
+    justify-content: flex-end;
+    /* Align items to the end (right side) */
+    margin-top: 16px;
+    /* Adjust margin as needed */
+}
+
 .calendarIcon {
     margin-left: 10px;
 }
@@ -41,7 +52,30 @@
 }
 
 body {
-    background-color: #F2E8DF;
+    /* background-color: #F2E8DF; */
+    background-image: url('assets/flower-background.jpg');
+    /* Replace with your image path */
+    background-size: cover;
+    /* Cover the entire container */
+    background-position: center;
+    /* Center the background image */
     align-items: center;
     justify-content: center;
+}
+
+.toggleIcon {
+    background-color: #008080;
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-right: 10px;
+    font-weight: 800;
+
+}
+
+.toggleIcon:hover {
+    background-color: #5683ED;
 }
