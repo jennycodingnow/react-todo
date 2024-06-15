@@ -3,13 +3,19 @@ type TodoItem = {
     title: string;
 };
 
+//what I send to airtable to create a TODO
 type TodoItemRequest = {
-    //what I send to airtable to create a TODO
     title: string;
 }
 
+//what I get back from airtable
 type TodoItemResponse = {
-    //what I get back from airtable
-    title: string;
-    id: number;
-}
+	records: TodoRecord[];
+};
+
+type TodoRecord = {
+	fields: {
+		title: string;
+	};
+	id: number;
+};

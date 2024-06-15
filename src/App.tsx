@@ -40,7 +40,7 @@ function App() {
             }
             const data = await response.json();
 
-            data.records.sort((objectA:TodoItem, objectB:TodoItem) => {
+            data.records.sort((objectA:TodoRecord, objectB:TodoRecord) => {
                 const titleA = objectA.fields.title.toLowerCase();
                 const titleB = objectB.fields.title.toLowerCase();
 
@@ -49,13 +49,10 @@ function App() {
                 return 0;
             });
 
-            const todos = data.records.map((todo: {id: number, fields: { title: string}}) => {
-                const newTodo = {
+            const todos: TodoItem[] = data.records.map((todo: TodoRecord) => ({
                     id: todo.id,
                     title: todo.fields.title,
-                };
-                return newTodo;
-            });
+            }));
             setTodoList(todos);
             setIsLoading(false);
         } catch (error) {
