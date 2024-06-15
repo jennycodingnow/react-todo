@@ -1,6 +1,6 @@
 type TodoItem = {
-    title: string;
     id: number;
+    title: string;
 };
 
 type TodoItemRequest = {

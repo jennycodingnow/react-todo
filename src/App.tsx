@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import { TbArrowsSort } from "react-icons/tb";
 import "./App.css"
 
 // const todoList = [
@@ -18,6 +19,7 @@ const apiURL = `https://api.airtable.com/v0/${
 function App() {
     const [todoList, setTodoList] = useState<TodoItem[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [sortAsc, setSortAsc] = useState<boolean>(true);
 
     // Get tasks from AirTable
     const fetchData = async () => {
@@ -37,6 +39,16 @@ function App() {
                 throw new Error(message);
             }
             const data = await response.json();
+
+            data.records.sort((objectA:TodoItem, objectB:TodoItem) => {
+                const titleA = objectA.fields.title.toLowerCase();
+                const titleB = objectB.fields.title.toLowerCase();
+
+                if (titleA < titleB) return sortAsc ? -1 : 1;
+                if (titleA > titleB) return sortAsc ? 1 : -1;
+                return 0;
+            });
+
             const todos = data.records.map((todo: {id: number, fields: { title: string}}) => {
                 const newTodo = {
                     id: todo.id,
@@ -112,7 +124,11 @@ function App() {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [sortAsc]);
+
+    const toggleSortOrder = () => {
+        setSortAsc((prevSortAsc) => !prevSortAsc);
+    };
 
     useEffect(() => {
         if (!isLoading) {
@@ -159,6 +175,11 @@ function App() {
                                     />
                                 </div>
                                 <AddTodoForm onAddTodo={addTodo} />
+                                <div className="sortingButtonContainer">
+                                    <button className="toggleIcon" onClick ={toggleSortOrder}>
+                                        {sortAsc ? <TbArrowsSort /> : <TbArrowsSort />}
+                                    </button>
+                                </div>
                                 {isLoading ? (
                                     <p>Loading...</p>
                                 ) : (
