@@ -1,0 +1,28 @@
+/* styles.css */
+.navBar {
+    padding: 1em;
+}
+
+.navBar ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    /* Align links to the right */
+    gap: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+.navBar li {
+    display: inline;
+}
+
+.navBar a {
+    color: green;
+    text-decoration: none;
+}
+
+.navBar a:hover {
+    text-decoration: underline;
+    color: #F2B263;
+}

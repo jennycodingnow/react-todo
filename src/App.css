@@ -7,11 +7,10 @@
 
 .appContainer {
     /* If the screen is at least 800px, the container will be this size */
-    width: 500px;
+    width: 650px;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    /* background-color: #F2C6C2; */
     background-color: #F2E8DF;
     color: #171212;
     border-radius: 10px;

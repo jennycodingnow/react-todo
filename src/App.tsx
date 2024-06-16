@@ -4,6 +4,9 @@ import TodoList from "./components/TodoList";
 import AddTodoForm from "./components/AddTodoForm";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { TbArrowsSort } from "react-icons/tb";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import AboutMe from "./routes/AboutMe";
 import "./App.css"
 
 // const todoList = [
@@ -157,7 +160,9 @@ function App() {
 
     return (
         <BrowserRouter>
+            <NavBar />
             <div className="appContainer">
+                
                 <Routes>
                     <Route
                         path="/"
@@ -188,9 +193,10 @@ function App() {
                             </>
                         }
                     />
-                    <Route path="/new" element={<h1>New Todo List</h1>} />
+                    <Route path="/aboutme" element={<AboutMe />} />
                 </Routes>
             </div>
+            <Footer />
         </BrowserRouter>
     );
 }
