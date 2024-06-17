@@ -41,7 +41,7 @@ function App() {
                 const message = `Error has ocurred: ${response.status}`;
                 throw new Error(message);
             }
-            const data = await response.json();
+            const data: TodoItemResponse = await response.json();
 
             data.records.sort((objectA:TodoRecord, objectB:TodoRecord) => {
                 const titleA = objectA.fields.title.toLowerCase();
@@ -66,7 +66,7 @@ function App() {
 
     // Post a task to Airtable
     const postTodo = async (todo: TodoItem): Promise<TodoItem | null> => {
-        const airtableData = {
+        const airtableData: TodoItemRequest = {
             fields: {
                 title: todo.title,
             },
@@ -162,7 +162,6 @@ function App() {
         <BrowserRouter>
             <NavBar />
             <div className="appContainer">
-                
                 <Routes>
                     <Route
                         path="/"

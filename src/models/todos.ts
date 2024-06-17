@@ -5,8 +5,10 @@ type TodoItem = {
 
 //what I send to airtable to create a TODO
 type TodoItemRequest = {
+	fields: {
     title: string;
-}
+	};
+};
 
 //what I get back from airtable
 type TodoItemResponse = {

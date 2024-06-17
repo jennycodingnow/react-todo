@@ -17,7 +17,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-    .container {
+    .appContainer {
         /* If the screen goes below 800px, the width of the container will be 90% of whatever that width is */
         width: 90%;
     }
