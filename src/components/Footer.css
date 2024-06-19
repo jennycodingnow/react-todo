@@ -1,0 +1,16 @@
+/* styles.css */
+.footer {
+    color: green;
+    padding: 1em;
+    text-align: center;
+    /* position: fixed; */
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    margin: 0;
+    /* margin-top: 60px; */
+}

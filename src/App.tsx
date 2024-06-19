@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TodoList from "./TodoList";
-import AddTodoForm from "./AddTodoForm";
+import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { TbArrowsSort } from "react-icons/tb";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import AboutMe from "./routes/AboutMe";
 import "./App.css"
 
 // const todoList = [
@@ -38,9 +41,9 @@ function App() {
                 const message = `Error has ocurred: ${response.status}`;
                 throw new Error(message);
             }
-            const data = await response.json();
+            const data: TodoItemResponse = await response.json();
 
-            data.records.sort((objectA:TodoItem, objectB:TodoItem) => {
+            data.records.sort((objectA:TodoRecord, objectB:TodoRecord) => {
                 const titleA = objectA.fields.title.toLowerCase();
                 const titleB = objectB.fields.title.toLowerCase();
 
@@ -49,13 +52,10 @@ function App() {
                 return 0;
             });
 
-            const todos = data.records.map((todo: {id: number, fields: { title: string}}) => {
-                const newTodo = {
+            const todos: TodoItem[] = data.records.map((todo: TodoRecord) => ({
                     id: todo.id,
                     title: todo.fields.title,
-                };
-                return newTodo;
-            });
+            }));
             setTodoList(todos);
             setIsLoading(false);
         } catch (error) {
@@ -66,7 +66,7 @@ function App() {
 
     // Post a task to Airtable
     const postTodo = async (todo: TodoItem): Promise<TodoItem | null> => {
-        const airtableData = {
+        const airtableData: TodoItemRequest = {
             fields: {
                 title: todo.title,
             },
@@ -160,6 +160,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            <NavBar />
             <div className="appContainer">
                 <Routes>
                     <Route
@@ -191,9 +192,10 @@ function App() {
                             </>
                         }
                     />
-                    <Route path="/new" element={<h1>New Todo List</h1>} />
+                    <Route path="/aboutme" element={<AboutMe />} />
                 </Routes>
             </div>
+            <Footer />
         </BrowserRouter>
     );
 }
